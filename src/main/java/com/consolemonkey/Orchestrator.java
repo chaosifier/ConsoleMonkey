@@ -2,8 +2,8 @@ package com.consolemonkey;
 
 import com.consolemonkey.consolemanager.ConsoleColor;
 import com.consolemonkey.consolemanager.ConsoleManager;
-import com.consolemonkey.gamemanager.Game;
-
+import org.jline.terminal.Terminal;
+import org.jline.terminal.TerminalBuilder;
 import java.util.List;
 
 public class Orchestrator {
@@ -15,6 +15,26 @@ public class Orchestrator {
     }
 
     public void begin() {
+      try{
+          Terminal terminal = TerminalBuilder.builder()
+                  .jna(true)
+                  .system(true)
+                  .build();
+
+// raw mode means we get keypresses rather than line buffered input
+          terminal.enterRawMode();
+          var reader = terminal .reader();
+
+          int read = reader.read();
+
+          reader.close();
+          terminal.close();
+      }
+      catch (Exception ex){
+          System.out.println(ex);
+      }
+
+
         welcome();
 
         // allow passing username from args to skip this step
