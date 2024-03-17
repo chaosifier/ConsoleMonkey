@@ -1,6 +1,6 @@
-import model.FileRepository;
-import model.GameSession;
-import model.Player;
+package com.consolemonkey;
+
+import com.consolemonkey.model.*;
 
 import java.util.List;
 import java.util.Random;
