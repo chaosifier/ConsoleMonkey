@@ -1,28 +1,26 @@
 package com.consolemonkey.consolemanager;
 
-import com.consolemonkey.consolemanager.*;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
-import org.jline.reader.EndOfFileException;
+import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
-import org.jline.reader.UserInterruptException;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.NonBlockingReader;
 
 public class ConsoleManager {
     private static Optional<ConsoleManager> instance = Optional.empty();
-    private ConsoleColor defaultColor = ConsoleColor.GREEN_BOLD;
+    public final ConsoleColor defaultColor = ConsoleColor.GREEN_BOLD_BRIGHT;
+    public final ConsoleColor questionColor = ConsoleColor.CYAN_BOLD_BRIGHT;
     private Terminal terminal;
     private PrintWriter writer;
     private NonBlockingReader reader;
+    private LineReader lineReader;
 
     public ConsoleManager() {
         try {
@@ -32,6 +30,7 @@ public class ConsoleManager {
                     .build();
             writer = terminal.writer();
             reader = terminal.reader();
+            lineReader = LineReaderBuilder.builder().build();
             // var reader2 = LineReaderBuilder.builder().build();
             // var line = reader2.readLine();
         } catch (Exception e) {
@@ -49,14 +48,16 @@ public class ConsoleManager {
         return instance.orElseGet(ConsoleManager::createInstance);
     }
 
-    public void printDecoratedMessage(String message) {
-        colorPrint(getRepeatedString("#", 40), ConsoleColor.YELLOW_BOLD, true);
+    public void printDecoratedMessage(String message, String decorator, boolean clearTerminal) {
+        if (clearTerminal)
+            clearTerminal();
+        colorPrint(getRepeatedString(decorator, 40), ConsoleColor.YELLOW_BOLD, true);
         colorPrint(message, ConsoleColor.GREEN_BOLD_BRIGHT, true);
-        colorPrint(getRepeatedString("#", 40), ConsoleColor.YELLOW_BOLD, true);
+        colorPrint(getRepeatedString(decorator, 40), ConsoleColor.YELLOW_BOLD, true);
     }
 
     public void colorPrint(String text, ConsoleColor color, boolean addNewLine) {
-        writer.write(String.format("%s%s%s%s", color, text, defaultColor, addNewLine ? "\n" : ""));
+        writer.write(String.format("%s%s%s%s", color, text, ConsoleColor.RESET, addNewLine ? "\n" : ""));
     }
 
     public void print(String text, boolean addNewLine) {
@@ -73,11 +74,16 @@ public class ConsoleManager {
 
         final AtomicReference<String> userAnswerRef = new AtomicReference<>();
         do {
-            colorPrint(question, ConsoleColor.GREEN_BOLD, true);
-            colorPrint(String.format("%s : ", possibleAnswers.stream().collect(Collectors.joining(" OR "))),
+            colorPrint(question, questionColor, true);
+            colorPrint(
+                    String.format("%s%s : ", ConsoleColor.MAGENTA,
+                            possibleAnswers.stream()
+                                    .map(s -> String.format("%s%s%s", ConsoleColor.YELLOW_BOLD, s, defaultColor))
+                                    .collect(Collectors.joining(" OR "))),
                     defaultColor, false);
 
             userAnswerRef.set(readConsoleLine());
+            clearTerminal();
         } while (!possibleAnswers.stream().anyMatch(a -> a.equalsIgnoreCase(userAnswerRef.get())));
 
         return possibleAnswers.stream().filter(a -> a.equalsIgnoreCase(userAnswerRef.get())).findFirst().get();
@@ -87,7 +93,7 @@ public class ConsoleManager {
         String userAnswer = "";
 
         do {
-            colorPrint(String.format("%s : ", question), ConsoleColor.GREEN, false);
+            colorPrint(String.format("%s : ", question), questionColor, false);
             userAnswer = readConsoleLine();
         } while (userAnswer.isBlank());
 
@@ -96,39 +102,32 @@ public class ConsoleManager {
 
     public String readConsoleLine() {
         try {
-            int returnIntVal = 13;
-            String output = "";
-            int curInput = -1;
-            do {
-                curInput = reader.read();
-                String curInputStr = String.valueOf((char) curInput);
-
-                if (curInput != returnIntVal) {
-                    writer.write(curInputStr);
-                    output += curInputStr;
-                }
-
-            } while (curInput != returnIntVal);
-
-            printNewLine();
-
-            return output;
-        } catch (IOException e) {
-            System.out.println("error reading line");
+            return lineReader.readLine();
+        } catch (Exception ex) {
             return "";
         }
     }
 
-    private void printNewLine() {
+    public void printNewLine() {
         writer.write("\n");
     }
 
-    public String readConsoleKey() {
+    public char readConsoleKey() {
         try {
-            return String.valueOf((char) reader.read());
+            return (char) reader.read();
         } catch (IOException e) {
             System.out.println("error reading key");
-            return "";
+            return (char) 0;
         }
+    }
+
+    public void clearTerminal() {
+        // terminal.puts(Capability.);
+        // terminal.flush();
+        writer.write("\033[H\033[2J");
+        writer.flush();
+        terminal.flush();
+
+        // reader.callWidget(LineReader.CLEAR_SCREEN);
     }
 }
