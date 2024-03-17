@@ -1,9 +1,11 @@
 package com.consolemonkey.model;
 
-import java.time.Period;
+import java.io.Serializable;
 
-public class GameSession {
-    private Period sessionDuration;
+public class GameSession implements Serializable {
+
+    private static final long serialVersionUID = 2905543584164919492L;
+    private long sessionDuration;
     private int averageWPM;
     private double accuracy;
     private Player player;
@@ -14,11 +16,11 @@ public class GameSession {
     public GameSession() {
     }
 
-    public Period getSessionDuration() {
+    public long getSessionDuration() {
         return sessionDuration;
     }
 
-    public void setSessionDuration(Period sessionDuration) {
+    public void setSessionDuration(long sessionDuration) {
         this.sessionDuration = sessionDuration;
     }
 
@@ -60,5 +62,10 @@ public class GameSession {
 
     public void setPrivate(Boolean aPrivate) {
         isPrivate = aPrivate;
+    }
+
+    @Override
+    public String toString() {
+        return STR."GameSession{sessionDuration=\{sessionDuration}, averageWPM=\{averageWPM}, accuracy=\{accuracy}, player=\{player}, wordPool=\{wordPool}, isPrivate=\{isPrivate}\{'}'}";
     }
 }
