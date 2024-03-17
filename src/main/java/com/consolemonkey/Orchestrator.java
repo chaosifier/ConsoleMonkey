@@ -78,11 +78,10 @@ public class Orchestrator {
     }
 
     private void viewOverallStats(Player player) {
-        consoleManager.colorPrint("Your stats..", ConsoleColor.YELLOW_BOLD, true);
-        consoleManager.printDecoratedMessage(String.format("Your stats %s \nSession : %s",
-                Player.formatTerminalString(player), GameSession.formatTerminalString(player.getGameSessions())), "-",
-                true);
-
+        consoleManager.printDecoratedMessage(Player.formatTerminalString(player), "*", true);
+        consoleManager.colorPrint("\nAll Sessions", consoleManager.defaultColor, true);
+        consoleManager.printDecoratedMessage(GameSession.formatTerminalString(player.getGameSessions()), "-",
+                false);
     }
 
     private void startNewSession(Player player) throws Exception {

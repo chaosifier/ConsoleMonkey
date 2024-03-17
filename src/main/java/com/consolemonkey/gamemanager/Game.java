@@ -110,7 +110,7 @@ public class Game {
         String remainingSection = text.substring(curIndex + 1, text.length());
 
         consoleManager.colorPrint(completedSection, ConsoleColor.BLUE, false);
-        consoleManager.colorPrint(curChar, ConsoleColor.YELLOW_UNDERLINED, false);
+        consoleManager.colorPrint(curChar, ConsoleColor.YELLOW_BOLD_BRIGHT, false);
         consoleManager.colorPrint(remainingSection, ConsoleColor.GREEN_BOLD_BRIGHT, false);
     }
 }

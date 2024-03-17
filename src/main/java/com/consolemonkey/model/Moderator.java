@@ -35,6 +35,6 @@ public class Moderator extends User implements Serializable {
 
     @Override
     public String toString() {
-        return STR."Moderator{privilege=\{privilege}\{'}'}";
+        return String.format("Moderator{privilege={%s}}", privilege);
     }
 }

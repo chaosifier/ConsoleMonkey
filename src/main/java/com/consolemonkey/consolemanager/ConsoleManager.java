@@ -64,7 +64,7 @@ public class ConsoleManager {
         colorPrint(text, defaultColor, addNewLine);
     }
 
-    private String getRepeatedString(String strToRepeat, int times) {
+    public static String getRepeatedString(String strToRepeat, int times) {
         return new String(new char[times]).replace("\0", strToRepeat);
     }
 

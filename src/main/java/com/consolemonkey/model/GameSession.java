@@ -3,6 +3,8 @@ package com.consolemonkey.model;
 import java.io.Serializable;
 import java.util.List;
 
+import com.consolemonkey.consolemanager.ConsoleManager;
+
 public class GameSession implements Serializable {
 
     private static final long serialVersionUID = 2905543584164919492L;
@@ -67,14 +69,24 @@ public class GameSession implements Serializable {
 
     @Override
     public String toString() {
-        return STR."GameSession{sessionDuration=\{sessionDuration}, averageWPM=\{averageWPM}, accuracy=\{accuracy}, player=\{player}, wordPool=\{wordPool}, isPrivate=\{isPrivate}\{'}'}";
+        return String.format("GameSession{sessionDuration=%n, averageWPM=%f, accuracy=%n, player=%s, wordPool=%s, isPrivate=%s}}", sessionDuration, averageWPM, accuracy, player, wordPool, isPrivate);
     }
 
     public static String formatTerminalString(List<GameSession> gSessions){
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("\n Average Speed |Duration | Accuracy "));
-        gSessions.forEach(gameSession -> sb.append(String.format("\n %3.2f         | %s       | %.2f ", gameSession.getAverageWPM(), gameSession.getSessionDuration(), gameSession.getAccuracy())));
 
+        for(int i = 0; i < gSessions.size(); i++){
+            var sess = gSessions.get(i);
+
+            sb.append(String.format("Average Speed: %.0f WPM\n", sess.getAverageWPM()));
+            sb.append(String.format("Accuracy: %.2f%%\n", sess.getAccuracy()));
+            sb.append(String.format("Duration: %d secs", sess.getSessionDuration()));
+
+            if(i < gSessions.size() - 1){
+                sb.append(String.format("\n%s\n", ConsoleManager.getRepeatedString("-", 20)));
+            }
+        }
+        
         return sb.toString();
     }
 }
