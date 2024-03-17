@@ -14,6 +14,7 @@ ConsoleMonkey aims to solve the common problem of improving typing skills in an 
 ### Screenshots:
 ![image](https://github.com/chaosifier/ConsoleMonkey/assets/7871740/367e1c53-b4ea-4395-9172-4b969c675668)
 ![image](https://github.com/chaosifier/ConsoleMonkey/assets/7871740/17a60506-7748-4ae7-bb60-43983d088ee1)
+![image](https://github.com/chaosifier/ConsoleMonkey/assets/7871740/202c4dc9-2061-475f-91f9-c440a162263f)
 ![image](https://github.com/chaosifier/ConsoleMonkey/assets/7871740/cc24e527-d03e-494b-823a-dd7dc19a5f62)
 ![image](https://github.com/chaosifier/ConsoleMonkey/assets/7871740/1befca37-bee6-4790-9049-f6b0f7bb2c62)
 
