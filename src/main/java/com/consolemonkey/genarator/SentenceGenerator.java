@@ -9,6 +9,7 @@ import java.util.Random;
 public class SentenceGenerator {
     private Map<String, List<String>> wordMap;
     private Random random;
+    private boolean trained;
 
     public SentenceGenerator() {
         wordMap = new HashMap<>();
@@ -25,6 +26,7 @@ public class SentenceGenerator {
             }
             wordMap.get(currentWord).add(nextWord);
         }
+        trained = true;
     }
 
     public String generateSentence(int length) {
@@ -58,5 +60,9 @@ public class SentenceGenerator {
         // Generate a random sentence
         String randomSentence = generator.generateSentence(8);
         System.out.println("Random Sentence: " + randomSentence);
+    }
+
+    public boolean isTrained() {
+        return trained;
     }
 }
