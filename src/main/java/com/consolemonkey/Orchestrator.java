@@ -15,26 +15,6 @@ public class Orchestrator {
     }
 
     public void begin() {
-      try{
-          Terminal terminal = TerminalBuilder.builder()
-                  .jna(true)
-                  .system(true)
-                  .build();
-
-// raw mode means we get keypresses rather than line buffered input
-          terminal.enterRawMode();
-          var reader = terminal .reader();
-
-          int read = reader.read();
-
-          reader.close();
-          terminal.close();
-      }
-      catch (Exception ex){
-          System.out.println(ex);
-      }
-
-
         welcome();
 
         // allow passing username from args to skip this step
