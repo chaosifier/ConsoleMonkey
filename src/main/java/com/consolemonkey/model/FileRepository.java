@@ -1,6 +1,8 @@
 package com.consolemonkey.model;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class FileRepository {
@@ -31,8 +33,18 @@ public class FileRepository {
 
     public Player readPlayerData(String id) {
         Player loginUser = new Player(id);
-        File file = new File(loginUser.getId());
-        return (Player) readObjectFromFile(file);
+        List<GameSession> gameSessions = new ArrayList<GameSession>();
+        loginUser.setGameSessions(gameSessions);
+
+            File file = new File(loginUser.getId());
+            if(file.exists()){
+                return (Player) readObjectFromFile(file);
+            } else{
+                write(loginUser);
+                return loginUser;
+            }
+        
+        
     }
 
     public static Object readObjectFromFile(File file) {
