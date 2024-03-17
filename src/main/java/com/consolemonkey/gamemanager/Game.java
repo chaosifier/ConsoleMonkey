@@ -54,7 +54,8 @@ public class Game {
                 curIndex++;
             }
         } else {
-            mistakeCounter++;
+            mistakeCounter++;            
+            java.awt.Toolkit.getDefaultToolkit().beep();
         }
     }
 
