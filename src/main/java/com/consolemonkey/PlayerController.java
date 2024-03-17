@@ -5,6 +5,8 @@ import com.consolemonkey.model.*;
 import java.util.List;
 import java.util.Random;
 
+import java.util.ArrayList;
+
 public class PlayerController {
 
     FileRepository fileRepository = new FileRepository();
@@ -20,7 +22,10 @@ public class PlayerController {
         System.out.println("Reading Player Data");
         Player player = fileRepository.readPlayerData(id);
 
-        List<GameSession> gameSessions = player.getGameSessions();
+        if (player.getGameSessions()==null){
+            List<GameSession> gameSessions = new ArrayList<GameSession>();
+            player.setGameSessions(gameSessions);
+        }
 
         return player;
     }

@@ -1,10 +1,13 @@
 package com.consolemonkey.gamemanager;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-
+import com.consolemonkey.PlayerController;
 import com.consolemonkey.consolemanager.ConsoleColor;
 import com.consolemonkey.consolemanager.ConsoleManager;
+import com.consolemonkey.model.GameSession;
+import com.consolemonkey.model.Player;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 public class Game {
     private ConsoleManager consoleManager;
@@ -15,13 +18,19 @@ public class Game {
     private LocalDateTime endDateTime;
     private int totalWords;
 
-    public Game(String text) throws Exception {
+    private PlayerController pController;
+    private Player player;
+
+    public Game(String text, Player player) throws Exception {
         if (text == null || text.isEmpty()) {
             throw new Exception("Invalid game text");
         }
 
         this.text = text;
+
         consoleManager = ConsoleManager.getInstance();
+        pController= new PlayerController();
+        this.player= player;
         totalWords = text.split("\\w+").length;
     }
 
@@ -67,6 +76,22 @@ public class Game {
         var duration = Duration.between(startDateTime, endDateTime).toSeconds();
         var averageSpeed = (float) totalWords / (duration / 60f);
         var accuracy = 100 - ((float) mistakeCounter / text.length() * 100);
+
+        GameSession gSession = new GameSession();
+
+        if (player.getBestWPM() == 0.0f){
+            player.setBestWPM(averageSpeed);
+            player.setWorstWPM(averageSpeed);
+        }
+        if (player.getBestWPM() < averageSpeed) {
+            player.setBestWPM(averageSpeed);
+        } else if(averageSpeed < player.getWorstWPM()){
+            player.setWorstWPM(averageSpeed);
+        }
+        gSession.setAccuracy(accuracy);
+        gSession.setAverageWPM(averageSpeed);
+        gSession.setSessionDuration(duration);
+        pController.endGameSession(player, gSession);
 
         consoleManager.clearTerminal();
         consoleManager.colorPrint("Session Complete!", ConsoleColor.YELLOW_BOLD, true);

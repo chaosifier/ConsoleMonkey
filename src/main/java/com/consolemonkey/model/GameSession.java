@@ -1,12 +1,13 @@
 package com.consolemonkey.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class GameSession implements Serializable {
 
     private static final long serialVersionUID = 2905543584164919492L;
     private long sessionDuration;
-    private int averageWPM;
+    private float averageWPM;
     private double accuracy;
     private Player player;
     private WordPool wordPool;
@@ -24,11 +25,11 @@ public class GameSession implements Serializable {
         this.sessionDuration = sessionDuration;
     }
 
-    public int getAverageWPM() {
+    public float getAverageWPM() {
         return averageWPM;
     }
 
-    public void setAverageWPM(int averageWPM) {
+    public void setAverageWPM(float averageWPM) {
         this.averageWPM = averageWPM;
     }
 
@@ -67,5 +68,13 @@ public class GameSession implements Serializable {
     @Override
     public String toString() {
         return STR."GameSession{sessionDuration=\{sessionDuration}, averageWPM=\{averageWPM}, accuracy=\{accuracy}, player=\{player}, wordPool=\{wordPool}, isPrivate=\{isPrivate}\{'}'}";
+    }
+
+    public static String formatTerminalString(List<GameSession> gSessions){
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("\n Average Speed |Duration | Accuracy "));
+        gSessions.forEach(gameSession -> sb.append(String.format("\n %3.2f         | %s       | %.2f ", gameSession.getAverageWPM(), gameSession.getSessionDuration(), gameSession.getAccuracy())));
+
+        return sb.toString();
     }
 }
