@@ -7,9 +7,9 @@ import java.util.Random;
 
 public class PlayerController {
 
+    FileRepository fileRepository = new FileRepository();
     public Player createNewPlayer(String id) {
         Player player = new Player(id);
-        FileRepository fileRepository = new FileRepository();
         fileRepository.write(player);
 
         return player;
@@ -18,7 +18,6 @@ public class PlayerController {
     public Player readPlayerData(String id) {
 
         System.out.println("Reading Player Data");
-        FileRepository fileRepository = new FileRepository();
         Player player = fileRepository.readPlayerData(id);
 
         List<GameSession> gameSessions = player.getGameSessions();
@@ -37,7 +36,6 @@ public class PlayerController {
 
         player.getGameSessions().add(gameSession);
 
-        FileRepository fileRepository = new FileRepository();
         fileRepository.write(player);
 
         return player;
