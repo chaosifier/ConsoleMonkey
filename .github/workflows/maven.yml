@@ -26,17 +26,6 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-      - name: release
-        uses: actions/create-release@v1
-        id: create_release
-        with:
-          draft: false
-          prerelease: true
-          release_name: ${{ steps.version.outputs.version }}
-          tag_name: ${{ github.ref }}
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-
       - name: upload artifact
         uses: actions/upload-release-asset@v1
         env:
