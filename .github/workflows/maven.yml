@@ -30,7 +30,7 @@ jobs:
         id: run
         run:  |
           echo Testing...
-          status=$(ls > log.txt 2>&1; echo $?)
+          status=$(ls target > log.txt 2>&1; echo $?)
           cat log.txt
           echo ::set-output name=status::$status
 
