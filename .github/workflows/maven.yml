@@ -24,7 +24,7 @@ jobs:
           cache: maven
 
       - name: Build with Maven
-        run: mvn clean install
+        run: mvn -B package --file pom.xml
 
       - name: Upload Release Assets
         uses: actions/upload-release-asset@v1
