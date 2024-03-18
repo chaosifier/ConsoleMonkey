@@ -1,6 +1,6 @@
 name: Publish package to GitHub Packages
 on:
-  release:
+  push:
     types: [created]
 jobs:
   publish:
@@ -15,6 +15,6 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
       - name: Publish package
-        run: mvn --batch-mode deploy
+        run: mvn --batch-mode deploy --file test/pom.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
