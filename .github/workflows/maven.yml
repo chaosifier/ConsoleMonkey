@@ -14,7 +14,9 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-      - name: Publish package
-        run: mvn clean deploy
+      - name: Deploy to Github Package Registry
         env:
+          GITHUB_USERNAME: x-access-token
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run:
+          mvn --settings settings.xml deploy
