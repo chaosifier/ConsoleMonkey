@@ -75,5 +75,10 @@
             <name>GitHub Packages</name>
             <url>https://maven.pkg.github.com/chaosifier/ConsoleMonkey</url>
         </repository>
+        <snapshotRepository>
+            <id>github</id>
+            <name>GitHub Snapshot Packages</name>
+            <url>https://maven.pkg.github.com/chaosifier/ConsoleMonkey</url>
+        </snapshotRepository>
     </distributionManagement>
 </project>
