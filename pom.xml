@@ -71,18 +71,18 @@
     </build>
     <distributionManagement>
         <snapshotRepository>
-            <id>github-snapshot</id>
+            <id>github</id>
             <name>GitHub snapshot</name>
-            <url>https://maven.pkg.github.com/chaosifier/consolemonkey/</url>
+            <url>https://maven.pkg.github.com/chaosifier/consolemonkey</url>
             <uniqueVersion>true</uniqueVersion>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
         </snapshotRepository>
         <repository>
-            <id>github-release</id>
+            <id>github</id>
             <name>GitHub release</name>
-            <url>https://maven.pkg.github.com/chaosifier/consolemonkey/</url>
+            <url>https://maven.pkg.github.com/chaosifier/consolemonkey</url>
             <uniqueVersion>false</uniqueVersion>
             <snapshots>
                 <enabled>false</enabled>
