@@ -25,8 +25,11 @@ public class ConsoleManager {
     public ConsoleManager() {
         try {
             terminal = TerminalBuilder.builder()
+                    .name("Console Monkey")
+                    .jansi(true)
                     .jna(true)
                     .system(true)
+                    .dumb(false)
                     .build();
             writer = terminal.writer();
             reader = terminal.reader();
@@ -125,8 +128,8 @@ public class ConsoleManager {
         // terminal.puts(Capability.);
         // terminal.flush();
         writer.write("\033[H\033[2J");
-        writer.flush();
-        terminal.flush();
+        // writer.flush();
+        // terminal.flush();
 
         // reader.callWidget(LineReader.CLEAR_SCREEN);
     }
