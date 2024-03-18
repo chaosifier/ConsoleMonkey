@@ -30,7 +30,7 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ github.event.repository.releases_url }}
-          asset_path: ./target/*.jar
+          asset_path: ./src/target/*.jar
           asset_name: consolemonkey-${{ github.sha }}.jar
           asset_content_type: application/java-archive
         env:
