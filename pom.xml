@@ -71,13 +71,9 @@
     </build>
     <distributionManagement>
         <repository>
-            <name>ConsoleMonkey</name>
-            <url>https://github.com/chaosifier/ConsoleMonkey</url>
-          </repository>
-        <!-- <repository>
-          <id>github</id>
-          <name>GitHub Packages</name>
-          <url>https://maven.pkg.github.com/chaosifier/ConsoleMonkey</url>
-        </repository> -->
-      </distributionManagement>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/chaosifier/ConsoleMonkey</url>
+        </repository>
+    </distributionManagement>
 </project>
