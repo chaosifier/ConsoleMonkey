@@ -26,6 +26,14 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
+      - name: Run File and collect logs
+        id: run
+        run:  |
+          echo Testing...
+          status=$(ls > log.txt 2>&1; echo $?)
+          cat log.txt
+          echo ::set-output name=status::$status
+
       - name: Upload Release Assets
         uses: actions/upload-release-asset@v1
         with:
