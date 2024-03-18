@@ -26,20 +26,24 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-      - name: Run File and collect logs
-        id: run
-        run:  |
-          echo Testing...
-          status=$(ls target > log.txt 2>&1; echo $?)
-          cat log.txt
-          echo ::set-output name=status::$status
-
-      - name: Upload Release Assets
-        uses: actions/upload-release-asset@v1
+      - name: release
+        uses: actions/create-release@v1
+        id: create_release
         with:
-          upload_url: ${{ github.event.repository.releases_url }}
-          asset_path:  /home/runner/work/ConsoleMonkey/ConsoleMonkey/target/*.jar
+          draft: false
+          prerelease: true
+          release_name: ${{ steps.version.outputs.version }}
+          tag_name: ${{ github.ref }}
+          body_path: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: upload artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./target/*.jar
           asset_name: consolemonkey-${{ github.sha }}.jar
           asset_content_type: application/java-archive
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
