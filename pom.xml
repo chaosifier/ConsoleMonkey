@@ -6,7 +6,7 @@
 
     <groupId>com.consolemonkey</groupId>
     <artifactId>ConsoleMonkey</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
@@ -75,10 +75,5 @@
             <name>GitHub Packages</name>
             <url>https://maven.pkg.github.com/chaosifier/ConsoleMonkey</url>
         </repository>
-        <snapshotRepository>
-            <id>github</id>
-            <name>GitHub Snapshot Packages</name>
-            <url>https://maven.pkg.github.com/chaosifier/ConsoleMonkey</url>
-        </snapshotRepository>
     </distributionManagement>
 </project>
