@@ -71,9 +71,14 @@
     </build>
     <distributionManagement>
         <repository>
-            <id>chaosifier</id>
+            <id>releases</id>
             <name>GitHub Packages</name>
             <url>https://maven.pkg.github.com/chaosifier/ConsoleMonkey</url>
         </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>GitHub Package Snapshots</name>
+            <url>https://maven.pkg.github.com/chaosifier/ConsoleMonkey</url>
+        </snapshotRepository>
     </distributionManagement>
 </project>
