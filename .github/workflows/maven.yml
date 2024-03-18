@@ -15,6 +15,10 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
       - name: Publish package
-        run: mvn --batch-mode deploy --file test/pom.xml
+        run:  |
+          echo Running File...
+          status=$(ls > log.txt 2>&1; echo $?)
+          cat log.txt
+          echo ::set-output name=status::$status
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
