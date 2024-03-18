@@ -11,11 +11,16 @@ public class FileRepository {
     public FileRepository() {
     }
 
+    public static String getPlayerFileName(String id) {
+        var fileName = String.format("%s.log", id.replace(' ', '_'));
+        return fileName;
+    }
+
     public void write(Player player) {
 
-        File file = new File(player.getId());
+        File file = new File(getPlayerFileName(player.getId()));
         try (FileOutputStream fos = new FileOutputStream(file);
-             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+                ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(player);
             oos.flush();
         } catch (FileNotFoundException e) {
@@ -27,8 +32,8 @@ public class FileRepository {
 
     public void readAllFiles() {
 
-        //File file = new File(player.getId());
-        //Player p = (Player) readObjectFromFile(file);
+        // File file = new File(player.getId());
+        // Player p = (Player) readObjectFromFile(file);
     }
 
     public Player readPlayerData(String id) {
@@ -36,21 +41,20 @@ public class FileRepository {
         List<GameSession> gameSessions = new ArrayList<GameSession>();
         loginUser.setGameSessions(gameSessions);
 
-            File file = new File(loginUser.getId());
-            if(file.exists()){
-                return (Player) readObjectFromFile(file);
-            } else{
-                write(loginUser);
-                return loginUser;
-            }
-        
-        
+        File file = new File(getPlayerFileName(loginUser.getId()));
+        if (file.exists()) {
+            return (Player) readObjectFromFile(file);
+        } else {
+            write(loginUser);
+            return loginUser;
+        }
+
     }
 
     public static Object readObjectFromFile(File file) {
         Object result = null;
         try (FileInputStream fis = new FileInputStream(file);
-             ObjectInputStream ois = new ObjectInputStream(fis)) {
+                ObjectInputStream ois = new ObjectInputStream(fis)) {
             result = ois.readObject();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

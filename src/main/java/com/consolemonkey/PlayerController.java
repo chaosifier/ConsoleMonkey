@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class PlayerController {
 
     FileRepository fileRepository = new FileRepository();
+
     public Player createNewPlayer(String id) {
         Player player = new Player(id);
         fileRepository.write(player);
@@ -18,11 +19,10 @@ public class PlayerController {
     }
 
     public Player readPlayerData(String id) {
-
         System.out.println("Reading Player Data");
         Player player = fileRepository.readPlayerData(id);
 
-        if (player.getGameSessions()==null){
+        if (player.getGameSessions() == null) {
             List<GameSession> gameSessions = new ArrayList<GameSession>();
             player.setGameSessions(gameSessions);
         }

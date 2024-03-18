@@ -56,10 +56,6 @@
                             <mainClass>com.consolemonkey.Main</mainClass>
                         </manifest>
                     </archive>
-                    <source>21</source>
-                    <target>21</target>
-                    <compilerArgs>--enable-preview</compilerArgs>
-                    <enablePreview>true</enablePreview>
                 </configuration>
                 <executions>
                     <execution>

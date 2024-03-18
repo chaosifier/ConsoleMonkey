@@ -34,8 +34,6 @@ public class ConsoleManager {
             writer = terminal.writer();
             reader = terminal.reader();
             lineReader = LineReaderBuilder.builder().build();
-            // var reader2 = LineReaderBuilder.builder().build();
-            // var line = reader2.readLine();
         } catch (Exception e) {
             System.out.println("Critical error occurred when creating terminal session.");
             System.exit(0);
