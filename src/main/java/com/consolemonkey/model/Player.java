@@ -43,9 +43,11 @@ public class Player extends User implements Serializable {
         return String.format("Player{Name=%s, bestWPM=%n, worstWPM=%n WPM}", getId(), bestWPM, worstWPM);
     }
 
-    public static String formatTerminalString(Player player){
+    public static String formatTerminalString(Player player) {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("Name: %s \nBest WPM: %s \nWorst WPM: %s ", player.getId() ,player.getBestWPM(), player.getWorstWPM()));
+        sb.append(String.format("Name: %s \nBest WPM: %d \nWorst WPM: %d ", player.getId(),
+                (int) player.getBestWPM(),
+                (int) player.getWorstWPM()));
 
         return sb.toString();
     }
