@@ -42,6 +42,7 @@ public class SentenceGenerator {
             sentence.add(nextWord);
             startWord = nextWord;
         }
+        sentence = sentence.stream().limit(length).toList();
         return String.join(" ", sentence);
     }
 

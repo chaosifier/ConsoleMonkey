@@ -1,6 +1,5 @@
 package com.consolemonkey;
 
-import com.consolemonkey.consolemanager.ConsoleColor;
 import com.consolemonkey.consolemanager.ConsoleManager;
 import com.consolemonkey.gamemanager.Game;
 import com.consolemonkey.genarator.SentenceGenerator;
@@ -16,7 +15,7 @@ public class Orchestrator {
     private PlayerController pController;
     private Player player;
     private SentenceGenerator generator;
-    private int defaultNoOfWords = 30;
+    private int defaultNoOfWords = 15;
 
     public Orchestrator() {
         consoleManager = ConsoleManager.getInstance();
@@ -95,6 +94,35 @@ public class Orchestrator {
     }
 
     private void welcome() {
-        consoleManager.printDecoratedMessage("Welcome to ConsoleMonkey!", "#", true);
+        consoleManager.clearTerminal();
+        printMonkey();
+        consoleManager.printDecoratedMessage("Welcome to ConsoleMonkey!", "#", false);
+    }
+
+    private void printMonkey(){
+        consoleManager.print("       .--.  .-'''-.  .--.  ", true);
+        consoleManager.print("      /.\"\".\\'.-. .-.\\\"\".\\ ", true);
+        consoleManager.print("      ||  / / O| | O\\ \\  || ", true);
+        consoleManager.print("      \\_/| \\__| |__/  \\_// ", true);
+        consoleManager.print("       `-'\\ .-n-n-. /`-'  ", true);
+        consoleManager.print("        _.-\\/       \\/-._  ", true);
+        consoleManager.print("      .'   (\\`.___.'/)   `.  ", true);
+        consoleManager.print("     /      \\\\`.___.'/      \\ ", true);
+        consoleManager.print("    /        `.___.'         \\ ", true);
+        consoleManager.print("    |     |             \\     \\ ", true);
+        consoleManager.print("    |     |   .      .  |\\     \\ ", true);
+        consoleManager.print("    |     |             | \\     \\ ", true);
+        consoleManager.print("     \\     \\            |  \\     \\ ", true);
+        consoleManager.print("      \\     \\           |.' `.    \\ ", true);
+        consoleManager.print("       `.    \\         .'     `.   \\ ", true);
+        consoleManager.print("  _.._   `.   `-. ___ /        /`.  `. ", true);
+        consoleManager.print(".'    `-._ `.    `.__)       .'  /    `. ", true);
+        consoleManager.print("|         `-.\\     \\/      .'   / /\\  )|\\. ", true);
+        consoleManager.print(" \\          _/ / /|/     .'    (_/ / / | \\) ", true);
+        consoleManager.print("  `._      (__/_/-/   ..'         (_/| |\\_) ", true);
+        consoleManager.print("     ``--._____.-(     `.            `-' ", true);
+        consoleManager.print("                   `--.   `. ", true);
+        consoleManager.print("                     (_/\\ \\", true);
+        consoleManager.print("                        /_/// ", true);
     }
 }
