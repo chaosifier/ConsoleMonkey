@@ -51,17 +51,17 @@ public class SentenceGenerator {
         return keysAsArray.get(random.nextInt(keysAsArray.size()));
     }
 
-    public static void main(String[] args) {
-        SentenceGenerator generator = new SentenceGenerator();
-        generator.train("The quick brown fox jumps over the lazy dog");
-        generator.train("The lazy dog sleeps");
-        generator.train("sleeps walking endlessly dreaming");
-        generator.train("fox gold money bitcoin");
+    // public static void main(String[] args) {
+    //     SentenceGenerator generator = new SentenceGenerator();
+    //     generator.train("The quick brown fox jumps over the lazy dog");
+    //     generator.train("The lazy dog sleeps");
+    //     generator.train("sleeps walking endlessly dreaming");
+    //     generator.train("fox gold money bitcoin");
 
-        // Generate a random sentence
-        String randomSentence = generator.generateSentence(8);
-        System.out.println("Random Sentence: " + randomSentence);
-    }
+    //     // Generate a random sentence
+    //     String randomSentence = generator.generateSentence(8);
+    //     System.out.println("Random Sentence: " + randomSentence);
+    // }
 
     public boolean isTrained() {
         return trained;
